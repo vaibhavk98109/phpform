@@ -32,7 +32,26 @@ $cgpa = $_POST['cgpa'];
 	echo "$name <br>" ;
 	echo "$year <br>" ;
 	echo $cgpa;
-//error_reporting (E_ALL ^ E_NOTICE);
+
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname="student";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password,$dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+$sql = "INSERT INTO cse VALUES('$regd','$name','$year','$cgpa')";
+if ($conn->query($sql) === TRUE) {
+    echo "<br>New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
     }
 }
 ?>
